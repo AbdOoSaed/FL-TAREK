@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by AbdOo Saed from Egypt
+  ~  all Copyright(c) reserved  2019.
+  -->
+
+<resources>
+    <string name="app_name">FL TAREK</string>
+    <string name="email">الاميل</string>
+    <string name="password">كلمة المرور</string>
+    <string name="phone_numper">رقم الهاتف</string>
+    <string name="name">الاسم</string>
+    <string name="login_now">دخول</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="address">العنوان</string>
+    <string name="add">اضافه</string>
+    <string name="order_adress">عنوان الاوردار</string>
+    <string name="order_delivery_price">سعر شحن الاوردار</string>
+    <string name="order_name">اسم الاوردار</string>
+    <string name="order_price">سعر الاوردار</string>
+    <string name="add_order">أضافة اوردار</string>
+    <string name="order_number">رقم الاوردار</string>
+    <string name="edit_order">تعديل الاوردار</string>
+    <string name="order_date">تاريخ الاوردار</string>
+    <string name="order_status">حالة الاوردار</string>
+    <string name="delete">مسح الاوردار</string>
+    <string name="save">حفظ تعديلات الاوردار</string>
+    <string name="set_order_ok">تم اتمام الاوردار</string>
+    <string name="delete_order">هل تريد بالفعل مسح الاوردار؟</string>
+    <string name="set_order_ok_Alart">هل تم بالفعل اكمال الاوردار؟</string>
+    <string name="save_edit_order">هل تريد حفظ التعديلات ؟</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="logout">تسجيل حروج</string>
+    <string name="search">بحث</string>
+</resources>

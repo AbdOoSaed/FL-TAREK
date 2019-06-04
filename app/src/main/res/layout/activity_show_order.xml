@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by AbdOo Saed from Egypt
+  ~  all Copyright(c) reserved  2019.
+  -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        tools:context=".ShowOrderActivity">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/edit_order"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/tv_Order_Number_Edit_Click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="orderClick"
+                android:text="@string/order_number"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_Order_Number_Edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:textSize="18sp"
+                android:visibility="visible"
+                tools:text="TextView" />
+
+            <EditText
+
+                android:id="@+id/ed_Order_Number_Edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:inputType="none"
+                android:visibility="gone"
+                tools:text="Name" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/tv_Order_Name_Edit_Click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="orderClick"
+                android:text="@string/order_name"
+                android:textSize="18sp" />
+
+            <TextView
+
+                android:id="@+id/tv_Order_Name_Edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:textSize="18sp"
+                android:visibility="visible"
+                tools:text="TextView" />
+
+            <EditText
+
+                android:id="@+id/ed_Order_Name_Edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:inputType="textPersonName"
+                android:visibility="gone"
+                tools:text="Name" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/tv_Order_Date_Edit_Click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="orderClick"
+                android:text="@string/order_date"
+                android:textSize="18sp" />
+
+            <TextView
+
+                android:id="@+id/tv_Order_Date_Edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:textSize="18sp"
+                android:visibility="visible"
+                tools:text="TextView" />
+
+            <EditText
+                android:id="@+id/ed_Order_Date_Edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:inputType="textPersonName"
+                android:visibility="gone"
+                tools:text="Name" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/tv_Order_Price_Edit_Click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="orderClick"
+                android:text="@string/order_price"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_Order_Price_Edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:textSize="18sp"
+                android:visibility="visible"
+                tools:text="TextView" />
+
+            <EditText
+                android:id="@+id/ed_Order_Price_Edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:inputType="textPersonName"
+                android:visibility="gone"
+                tools:text="Name" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/tv_Order_Delivery_Price_Edit_Click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="orderClick"
+                android:text="@string/order_delivery_price"
+                android:textSize="18sp" />
+
+            <TextView
+
+                android:id="@+id/tv_Order_Delivery_Price_Edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:textSize="18sp"
+                android:visibility="visible"
+                tools:text="TextView" />
+
+            <EditText
+                android:id="@+id/ed_Order_Delivery_Price_Edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:inputType="textPersonName"
+                android:visibility="gone"
+                tools:text="Name" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/tv_Order_Status_Edit_Click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="orderClick"
+                android:text="@string/order_status"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_Order_Status_Edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:textSize="18sp"
+                android:visibility="visible"
+                tools:text="TextView" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:id="@+id/tv_Order_Address_Edit_Click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="orderClick"
+                android:text="@string/order_adress"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_Order_Address_Edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:textSize="18sp"
+                android:visibility="visible"
+                tools:text="TextView" />
+
+            <EditText
+                android:id="@+id/ed_Order_Address_Edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="19"
+                android:inputType="textMultiLine"
+                android:visibility="gone"
+                tools:text="Name" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <Button
+                android:id="@+id/btn_Order_Delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/delete" />
+
+            <Button
+                android:id="@+id/btn_Order_Save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/save"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_Order_Ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/set_order_ok"
+            android:visibility="gone" />
+    </LinearLayout>
+</ScrollView>
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by AbdOo Saed from Egypt
+  ~  all Copyright(c) reserved  2019.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.OkOrderFragment">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerV_okOrder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "116024168454",
+    "firebase_url": "https://karem-hamed.firebaseio.com",
+    "project_id": "karem-hamed",
+    "storage_bucket": "karem-hamed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116024168454:android:a5cd71830241ac20",
+        "android_client_info": {
+          "package_name": "com.example.karemhamed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "116024168454-h1u32vju7vnuhgl3ol7m4rd248dsugg4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.karemhamed",
+            "certificate_hash": "5c4a327a3bf9db138399de1ade66519d286973f9"
+          }
+        },
+        {
+          "client_id": "116024168454-pdl2ohg1mcspccv71lbpshdrvpefou54.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCugVHlF96qxtIYnG8Qh8ADWDWhZvpOOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "116024168454-pdl2ohg1mcspccv71lbpshdrvpefou54.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
