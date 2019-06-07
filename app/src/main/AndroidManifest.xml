@@ -22,7 +22,10 @@
             android:name=".AddOrderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ClintOrderActivity"
-            android:label="Order"/>
+            android:label="Order"
+          >
+
+        </activity>
         <activity
             android:name=".AddClintActivity"
             android:theme="@style/AppTheme.NoActionBar" />

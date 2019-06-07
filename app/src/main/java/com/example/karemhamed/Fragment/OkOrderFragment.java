@@ -35,6 +35,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.example.karemhamed.HomeActivity.strUId;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -57,9 +59,10 @@ public class OkOrderFragment extends Fragment {
                              Bundle savedInstanceState) {
         strClintId = getArguments().getString("strClintId");
         fDatabase = FirebaseDatabase.getInstance();
-        RDatabase = fDatabase.getReference("/clint/" + strClintId).child("Order");
+        RDatabase = fDatabase.getReference(strUId).child("clint").child(strClintId).child("Order");
         RDatabase.keepSynced(true);
         View view = inflater.inflate(R.layout.fragment_ok_order, container, false);
+        getDataAndPutInList();
         recyclerV_okOrder = view.findViewById(R.id.recyclerV_okOrder);
 //        fab_add_order = view.findViewById(R.id.fab_add_order);
 //        getDataAndPutInList();
@@ -68,7 +71,7 @@ public class OkOrderFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerV_okOrder.setLayoutManager(layoutManager);
         recyclerV_okOrder.setAdapter(viewAdapter);
-        setHasOptionsMenu(true);
+
         // Inflate the layout for this fragment
         return view;
     }
@@ -87,6 +90,7 @@ public class OkOrderFragment extends Fragment {
                 }
                 Collections.reverse(orderArrayList);
                 viewAdapter.notifyDataSetChanged();
+                setHasOptionsMenu(true);
             }
 
             @Override
@@ -100,23 +104,24 @@ public class OkOrderFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
+        inflater.inflate(R.menu.menu_search, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search_fragment);
         final SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
 //                CharSequence query = searchView.getQuery();
-
-                if (!s.isEmpty()) {
-                    filterOrder(s.trim());
+//                filterOrder(s);
+                if (s == null || s.isEmpty()) {
+                    filterOrder("");
                 } else {
-                    getDataAndPutInList();
+                    filterOrder(s.trim());
                 }
                 return false;
             }

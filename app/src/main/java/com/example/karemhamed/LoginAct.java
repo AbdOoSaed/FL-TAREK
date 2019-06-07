@@ -51,11 +51,11 @@ public class LoginAct extends AppCompatActivity implements View.OnClickListener 
         fAuth = FirebaseAuth.getInstance();
         fDatabase = FirebaseDatabase.getInstance();
         RDatabase = fDatabase.getReference().child("clint");
-        RDatabase.keepSynced(true);
         if (fAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
             finish();
         }
+        RDatabase.keepSynced(true);
 
         initView();
     }
@@ -88,9 +88,9 @@ public class LoginAct extends AppCompatActivity implements View.OnClickListener 
                         if (task.isSuccessful()) {
                             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                             finish();
-                            Toast.makeText(getApplicationContext(), "تم تسجيلك بنجاح ^_^ ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.successfully_login), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(getApplicationContext(), "فشل التسجيل", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.login_failed), Toast.LENGTH_SHORT).show();
 //                            btnLogin.setEnabled(true);
                         }
                         btnLogin.setEnabled(true);

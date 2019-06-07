@@ -25,6 +25,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.example.karemhamed.HomeActivity.strUId;
+
 public class AddOrderActivity extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -63,8 +65,9 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_add_order);
         Intent intent = getIntent();
         strClintId = intent.getStringExtra("strClintId");
-        databaseReference = FirebaseDatabase.getInstance().getReference("clint").child(strClintId).child("Order");
-
+//        Toast.makeText(this, strClintId, Toast.LENGTH_LONG).show();
+        databaseReference = FirebaseDatabase.getInstance().getReference(strUId).child("clint").child(strClintId).child("Order");
+        //clint
         initView();
     }
 
@@ -110,6 +113,7 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
 
             ModelOrder upload = new ModelOrder(false, str_Time, str_OrderNumberAdd,
                     str_OrderNameAdd, str_OrderPriceAdd, str_OrderDeliveryPriceAdd, str_OrderAddressAdd, str_id);
+
             databaseReference.child(str_id).setValue(upload).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -117,14 +121,13 @@ public class AddOrderActivity extends AppCompatActivity implements View.OnClickL
                         btnAddOrder.setEnabled(true);
                         Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_SHORT).show();
                         finish();
-                    } else
+                    } else {
                         btnAddOrder.setEnabled(true);
                         Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             });
-
-
 
 
         }

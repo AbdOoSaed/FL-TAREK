@@ -31,8 +31,12 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 
+import static com.example.karemhamed.HomeActivity.strUId;
+
 public class AddClintActivity extends AppCompatActivity implements View.OnClickListener {
     private final static int PICK_IMAGE_REQUEST = 1;
+    //
+
     private Uri uriImage;
     private ImageView profileImage;
     private StorageReference storageRef;
@@ -53,13 +57,17 @@ public class AddClintActivity extends AppCompatActivity implements View.OnClickL
      * add
      */
     private Button btnAddClint;
+    //
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_clint);
         storageRef = FirebaseStorage.getInstance().getReference("clintPhoto");
-        databaseReference = FirebaseDatabase.getInstance().getReference("clint");
+        databaseReference = FirebaseDatabase.getInstance().getReference(strUId).child("clint");
+
+//        databaseReference = FirebaseDatabase.getInstance().getReference(strUId).child("clint");
         initView();
     }
 
@@ -98,6 +106,7 @@ public class AddClintActivity extends AppCompatActivity implements View.OnClickL
             edClintAddress.setEnabled(false);
             profileImage.setDrawingCacheEnabled(true);
             profileImage.buildDrawingCache();
+            profileImage.setEnabled(false);
             Bitmap bitmap = ((BitmapDrawable) profileImage.getDrawable()).getBitmap();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.WEBP, 5, baos);
@@ -131,6 +140,7 @@ public class AddClintActivity extends AppCompatActivity implements View.OnClickL
                         edClintName.setEnabled(true);
                         edClintPhone.setEnabled(true);
                         edClintAddress.setEnabled(true);
+                        profileImage.setEnabled(true);
                         finish();
 //                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                     } else {
@@ -140,6 +150,7 @@ public class AddClintActivity extends AppCompatActivity implements View.OnClickL
                         edClintName.setEnabled(true);
                         edClintPhone.setEnabled(true);
                         edClintAddress.setEnabled(true);
+                        profileImage.setEnabled(true);
                     }
                 }
             });

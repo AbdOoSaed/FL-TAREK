@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import static com.example.karemhamed.HomeActivity.strUId;
+
 public class ShowOrderActivity extends AppCompatActivity implements View.OnClickListener {
     //
     FirebaseDatabase firebaseDatabasem;
@@ -105,7 +107,7 @@ public class ShowOrderActivity extends AppCompatActivity implements View.OnClick
         strClintId = bundle.getString("strClintId");
         strShowOrderType = bundle.getString("strShowOrderType");
         firebaseDatabasem = FirebaseDatabase.getInstance();
-        tDatabaseReference = firebaseDatabasem.getReference();
+        tDatabaseReference = firebaseDatabasem.getReference().child(strUId).child("clint").child(strClintId).child("Order");
         getData();
         setData();
 
@@ -222,11 +224,12 @@ public class ShowOrderActivity extends AppCompatActivity implements View.OnClick
         strNewOrderPrice = edOrderPriceEdit.getText().toString();
         strNewOrderDeliveryPrice = edOrderDeliveryPriceEdit.getText().toString();
         strNewOrderAddress = edOrderAddressEdit.getText().toString();
+
         modelOrderEdit.setStrOrderNumber(strNewOrderNumber);
         modelOrderEdit.setStrOrderName(strNewOrderName);
         modelOrderEdit.setStrOrderDate(strNewOrderData);
         modelOrderEdit.setStrOrderPrics(strNewOrderPrice);
-        modelOrderEdit.setStrOrderDeliveryPrice(strOrderDeliveryPrice);
+        modelOrderEdit.setStrOrderDeliveryPrice(strNewOrderDeliveryPrice);
         modelOrderEdit.setStrOrderAddress(strNewOrderAddress);
     }
 
@@ -245,8 +248,7 @@ public class ShowOrderActivity extends AppCompatActivity implements View.OnClick
                 b.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Query queryDelte = tDatabaseReference.child("clint").child(strClintId).child("Order")
-                                .orderByChild("strOrderId").equalTo(modelOrderEdit.getStrOrderId());
+                        Query queryDelte = tDatabaseReference.orderByChild("strOrderId").equalTo(modelOrderEdit.getStrOrderId());
                         queryDelte.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -267,7 +269,7 @@ public class ShowOrderActivity extends AppCompatActivity implements View.OnClick
 
                 break;
             case R.id.btn_Order_Save:
-                b.setTitle(getString(R.string.delete_order));
+                b.setTitle(getString(R.string.save_edit_order));
                 b.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -278,8 +280,7 @@ public class ShowOrderActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         edToStrAndEditModel();
-                        Query querySaveEdit = tDatabaseReference.child("clint").child(strClintId).child("Order")
-                                .orderByChild("strOrderId").equalTo(modelOrderEdit.getStrOrderId());
+                        Query querySaveEdit = tDatabaseReference.orderByChild("strOrderId").equalTo(modelOrderEdit.getStrOrderId());
                         querySaveEdit.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -310,8 +311,7 @@ public class ShowOrderActivity extends AppCompatActivity implements View.OnClick
                 b.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Query querySetOk = tDatabaseReference.child("clint").child(strClintId).child("Order")
-                                .orderByChild("strOrderId").equalTo(modelOrderEdit.getStrOrderId());
+                        Query querySetOk = tDatabaseReference.orderByChild("strOrderId").equalTo(modelOrderEdit.getStrOrderId());
                         querySetOk.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

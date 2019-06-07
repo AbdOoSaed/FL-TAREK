@@ -10,6 +10,7 @@
     android:layout_height="match_parent"
     tools:context=".ClintOrderActivity">
 
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"

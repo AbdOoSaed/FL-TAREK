@@ -11,17 +11,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import android.view.Menu;
+import android.support.v7.widget.SearchView;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.example.karemhamed.Adabter.AdabterOrder;
 import com.example.karemhamed.AddOrderActivity;
@@ -37,6 +38,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.example.karemhamed.HomeActivity.strUId;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,6 +53,7 @@ public class AllOrderFragment extends Fragment implements SearchView.OnQueryText
     private DatabaseReference RDatabase;
     private FirebaseDatabase fDatabase;
     private AdabterOrder viewAdapter;
+//    private Toolbar toolbarAllOrder;
 
     public AllOrderFragment() {
         // Required empty public constructor
@@ -61,18 +65,31 @@ public class AllOrderFragment extends Fragment implements SearchView.OnQueryText
                              Bundle savedInstanceState) {
         strClintId = getArguments().getString("strClintId");
         fDatabase = FirebaseDatabase.getInstance();
-        RDatabase = fDatabase.getReference("/clint/" + strClintId).child("Order");
+        RDatabase = fDatabase.getReference(strUId).child("clint").child(strClintId).child("Order");
         RDatabase.keepSynced(true);
         View view = inflater.inflate(R.layout.fragment_all_order, container, false);
+        getDataAndPutInList();
         recyclerV_AllOrder = view.findViewById(R.id.recyclerV_AllOrder);
         fab_add_order = view.findViewById(R.id.fab_add_order);
-        getDataAndPutInList();
-        orderArrayListAll= new ArrayList<>();
+        recyclerV_AllOrder.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) {
+                    fab_add_order.hide();
+                } else {
+                    fab_add_order.show();
+                }
+
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+//        toolbarAllOrder = view.findViewById(R.id.toolbarOrder);
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbarAllOrder);
+        orderArrayListAll = new ArrayList<>();
         viewAdapter = new AdabterOrder(orderArrayListAll, getActivity(), strClintId, "AllOrder");
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerV_AllOrder.setLayoutManager(layoutManager);
         recyclerV_AllOrder.setAdapter(viewAdapter);
-        setHasOptionsMenu(true);
         fab_add_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +100,7 @@ public class AllOrderFragment extends Fragment implements SearchView.OnQueryText
                 startActivity(intent);
             }
         });
+
 
 
         // Inflate the layout for this fragment
@@ -105,12 +123,13 @@ public class AllOrderFragment extends Fragment implements SearchView.OnQueryText
                 }
                 Collections.reverse(orderArrayListAll);
                 viewAdapter.notifyDataSetChanged();
+                setHasOptionsMenu(true);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -119,30 +138,27 @@ public class AllOrderFragment extends Fragment implements SearchView.OnQueryText
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
+        inflater.inflate(R.menu.menu_search, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search_fragment);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(this);
         searchView.setQueryHint("Search");
-
-//        super.onCreateOptionsMenu(menu, inflater);
-
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onQueryTextSubmit(String s) {
-//        filter(s.trim());
+
         return false;
     }
 
     @Override
     public boolean onQueryTextChange(String s) {
 
-        if (!s.isEmpty()) {
-            filter(s.trim());
+        if (s == null || s.isEmpty()) {
+            filter("");
         } else {
-            getDataAndPutInList();
+            filter(s.trim());
         }
         return false;
     }

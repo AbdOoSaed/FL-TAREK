@@ -78,10 +78,14 @@ public class AdabterClint extends RecyclerView.Adapter<AdabterClint.ViewHolderCl
         return clintArrayList.size();
     }
 
+
+
     public void filterList(List<ModelClint> filteredList) {
         clintArrayList = filteredList;
         notifyDataSetChanged();
     }
+
+
 
     class ViewHolderClint extends RecyclerView.ViewHolder {
         private TextView tv_clint_name, tv_clint_phone, tv_clint_address;

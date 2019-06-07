@@ -27,5 +27,8 @@
     <string name="no">No</string>
     <string name="logout">Logout</string>
     <string name="search">Search</string>
+    <string name="successfully_login">You are successfully Login in ^_^</string>
+    <string name="login_failed">login failed -_-</string>
+    <string name="exit_messege">"Are you sure you want to exit?</string>
 
 </resources>

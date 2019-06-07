@@ -33,4 +33,7 @@
     <string name="no">لا</string>
     <string name="logout">تسجيل حروج</string>
     <string name="search">بحث</string>
+    <string name="successfully_login">تم تسجيل دخولك بنجاح ^_^</string>
+    <string name="login_failed">فشل تسجيل الدخول -_-</string>
+    <string name="exit_messege">متأكد انك عايز تخرج؟</string>
 </resources>

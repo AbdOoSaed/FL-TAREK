@@ -1,17 +1,18 @@
 package com.example.karemhamed;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -31,28 +32,37 @@ import java.util.Collections;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-    private DatabaseReference RDatabase;
+    public static String strUId;
     private FirebaseDatabase fDatabase;
+    private DatabaseReference RDatabase;
     private RecyclerView recyclerV;
     private AdabterClint viewAdapter;
     private List<ModelClint> clintArrayList;
     private FirebaseAuth mAuth;
     private ShimmerFrameLayout shimmer_view_container;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = findViewById(R.id.toolbarHome);
+        toolbar = findViewById(R.id.toolbarHome);
+        setSupportActionBar(toolbar);
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            strUId = mAuth.getCurrentUser().getUid();
+        } else {
+            Toast.makeText(this, "There's no user ID", Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(new Intent(getApplicationContext(), LoginAct.class));
+        }
         recyclerV = findViewById(R.id.recyclerV);
         shimmer_view_container = findViewById(R.id.shimmer_view_container);
-        setSupportActionBar(toolbar);
         // Read from the database
         fDatabase = FirebaseDatabase.getInstance();
-        RDatabase = fDatabase.getReference().child("clint");
+        RDatabase = fDatabase.getReference().child(strUId).child("clint");
         RDatabase.keepSynced(true);
         getDataAndPutInList();
-        mAuth = FirebaseAuth.getInstance();
         clintArrayList = new ArrayList<>();
         viewAdapter = new AdabterClint(clintArrayList, HomeActivity.this);
         recyclerV.setLayoutManager(new LinearLayoutManager(this));
@@ -89,8 +99,6 @@ public class HomeActivity extends AppCompatActivity {
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
 
-//        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -100,30 +108,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText == null || newText.isEmpty()) {
-                    Log.i("5465768", "678");
                     filter("");
                 } else {
-                    Log.i("5465768", "hfhfy");
                     filter(newText.trim());
                 }
-//                filter(newText.trim());
                 return false;
             }
         });
         return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_logout) {
-            mAuth.signOut();
-            finish();
-            startActivity(new Intent(getApplicationContext(), LoginAct.class));
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void filter(String text) {
@@ -134,7 +126,22 @@ public class HomeActivity extends AppCompatActivity {
                 filteredList.add(item);
             }
         }
+
         viewAdapter.filterList(filteredList);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_logout) {
+            mAuth.signOut();
+            finish();
+            startActivity(new Intent(getApplicationContext(), LoginAct.class));
+//            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void getDataAndPutInList() {
@@ -165,4 +172,18 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+
+                .setMessage(getString(R.string.exit_messege))
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        HomeActivity.super.onBackPressed();
+                    }
+                }).create().show();
+    }
+
 }
